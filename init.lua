@@ -3,21 +3,24 @@ print "Still, not good enough."
 require ('plugins')
 require ('remaps') 
 
-local o = vim.opt
-
-o.relativenumber = true
-o.number = true
+vim.opt.relativenumber = true
+vim.opt.number = true
 
 --hardcoded indentation
-
-o.sts = 2    --softtabstop
-o.sw  = 2    --shiftwidth
-o.sta = true --smartab uses 'sw'
-o.et  = true --expandtab
+vim.opt.sts = 2    --softtabstop
+vim.opt.sw  = 2    --shiftwidth
+vim.opt.sta = true --smartab uses 'sw'
+vim.opt.et  = true --expandtab
 
 --enchance vim experience
-o.path:append('**') --recursive `:find`
+vim.opt.path:append('**') --recursive `:find`
+
+--DANGER: do not confirm file writes, due to oil-tree confirmation
+vim.o.confirm = false   
 
 --initialize installed plugins
-require("oil").setup(oil_opts)
 require('mini.icons').setup()
+require('oil').setup(require('options.oil_tree')) 
+
+--themes enabled
+require('onenord').setup()
