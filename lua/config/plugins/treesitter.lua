@@ -1,7 +1,6 @@
--- return { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }
 return {
   "nvim-treesitter/nvim-treesitter",
-  build = ":TSUpdate", -- optional but useful to auto-update parsers
+  build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
   config = function()
     require("nvim-treesitter.configs").setup({

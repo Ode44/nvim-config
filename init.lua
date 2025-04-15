@@ -24,5 +24,6 @@ require'nvim-treesitter.install'.update({ with_sync = true })
 require('custom.f_term') --requires separate fzf but input lag made me not like it
 require('mini.icons').setup()
 
-require('lsp')
+require('config.lsp')
+
 require ('remaps') 
