@@ -1,10 +1,9 @@
 print "Still, not good enough."
+--options longer than two-three lines
+--must live outside current file !
 
-require ('plugins')
-require ('remaps') 
-
-vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 --hardcoded indentation
 vim.opt.sts = 2    --softtabstop
@@ -15,12 +14,15 @@ vim.opt.et  = true --expandtab
 --enchance vim experience
 vim.opt.path:append('**') --recursive `:find`
 
---DANGER: do not confirm file writes, due to oil-tree confirmation
+--DANGER: do not confirm file writes changes
 vim.o.confirm = false   
 
---initialize installed plugins
-require('mini.icons').setup()
+require('config.lazy')
+require('telescope').setup()
 require('oil').setup(require('options.oil_tree')) 
+require'nvim-treesitter.install'.update({ with_sync = true })
+require('custom.f_term') --requires separate fzf but input lag made me not like it
+require('mini.icons').setup()
 
---themes enabled
-require('onenord').setup()
+require('lsp')
+require ('remaps') 
