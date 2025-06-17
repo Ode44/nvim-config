@@ -1,9 +1,5 @@
 return {
   {
-    "neovim/nvim-lspconfig",
-    event = { "BufReadPre", "BufNewFile" },
-  },
-  {
     "williamboman/mason.nvim",
     build = ":MasonUpdate",
     cmd = "Mason",

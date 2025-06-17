@@ -1,29 +1,44 @@
-print "Still, not good enough."
 --options longer than two-three lines
 --must live outside current file !
 
-vim.opt.number = true
+vim.opt.number         = true
 vim.opt.relativenumber = true
 
 --hardcoded indentation
-vim.opt.sts = 2    --softtabstop
-vim.opt.sw  = 2    --shiftwidth
-vim.opt.sta = true --smartab uses 'sw'
-vim.opt.et  = true --expandtab
+vim.opt.sts            = 2 --Softtabstop
+vim.opt.sw             = 2 --Shiftwidth
+vim.opt.sta            = true --Smartab uses 'sw'
+vim.opt.et             = true --Expandtab
 
---enchance vim experience
+vim.diagnostic.config({
+  virtural_text = false,
+  underline = false,
+  signs = false --fixed annoying text shift
+})
+
+--Enhanced vim experience
 vim.opt.path:append('**') --recursive `:find`
+vim.opt.termguicolors = true
 
---DANGER: do not confirm file writes changes
-vim.o.confirm = false   
+--skip confirmation file writes changes
+vim.o.confirm = false
 
 require('config.lazy')
-require('telescope').setup()
-require('oil').setup(require('options.oil_tree')) 
-require'nvim-treesitter.install'.update({ with_sync = true })
-require('custom.f_term') --requires separate fzf but input lag made me not like it
+require('telescope').setup({
+  pickers = {
+    find_files = {
+      hidden = true
+    }
+  }
+})
+require('oil').setup(require('options.oil_tree'))
+require 'nvim-treesitter.install'.update({ with_sync = true })
 require('mini.icons').setup()
 
-require('config.lsp')
+vim.notify = require('notify')
+require('notify').setup(require('options.notify'))
 
-require ('remaps') 
+require('remaps')
+
+-- I though it will be cool. But --
+-- require('custom.f_term') -- Input lag between term and fish autocomplete
