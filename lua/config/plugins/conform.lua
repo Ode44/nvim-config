@@ -1,33 +1,55 @@
 return {
-  "stevearc/conform.nvim",
-  event = { "BufReadPre", "BufNewFile" },
-  enabled = false,
-  config = function()
-    require("conform").setup({
-      formatters_by_ft = {
-        lua = { "stylua" },
-        python = { "isort", "black" },
-        rust = { "rustfmt", lsp_format = "fallback" },
-        javascript = { "prettier" },
-        typescript = { "prettier" },
-        json = { "prettier" },
-        html = { "prettier" },
-        css = { "prettier" },
-        yaml = { "prettier" },
-      },
-      format_on_save = {
-        timeout_ms = 300,
-        lsp_fallback = true,
-      },
-      formatters = {
-        prettier = {
-          command = "./node_modules/.bin/prettier",
-          args = {
-            "--stdin-filepath", "$FILENAME",
-          },
-          cwd = require("conform.util").root_file({ ".prettierrc", "package.json" }),
-        },
-      },
-    })
-  end,
+	"stevearc/conform.nvim",
+	event = { "BufWritePre" },
+	cmd = { "ConformInfo" },
+	keys = {
+		{
+			"<leader>fr",
+			function()
+				require("conform").format({ async = true })
+			end,
+			mode = "n",
+			desc = "Format buffer",
+		},
+	},
+	-- This will provide type hinting with LuaLS
+	---@module "conform"
+	---@type conform.setupOpts
+	opts = {
+		-- Define your formatters
+		formatters_by_ft = {
+			lua = { "stylua" },
+			python = { "isort", "black" },
+			rust = { "rustfmt", lsp_format = "fallback" },
+			javascript = { "prettier" },
+			json = { "prettier" },
+			typescript = { "prettier" },
+			html = { "prettier" },
+			css = { "prettier" },
+		},
+		-- Set default options
+		default_format_opts = {
+			lsp_format = "fallback",
+		},
+		-- Set up format-on-save
+		format_on_save = { timeout_ms = 500 },
+		-- Customize formatters
+		formatters = {
+			shfmt = {
+				prepend_args = { "-i", "2" },
+			},
+			prettier = {
+				command = "./node_modules/.bin/prettier",
+				args = {
+					"--stdin-filepath",
+					"$FILENAME",
+				},
+				-- cwd = require("conform.util").root_file({ ".prettierrc.json", "package.json" }),
+			},
+		},
+	},
+	init = function()
+		-- If you want the formatexpr, here is the place to set it
+		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+	end,
 }

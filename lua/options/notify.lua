@@ -10,7 +10,7 @@ return {
   },
   level = 2,
   minimum_width = 30,
-  max_width = 50,
+  max_width = 300,
   render = "compact",
   stages = "static",
   time_formats = {

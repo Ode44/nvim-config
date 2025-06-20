@@ -5,8 +5,8 @@ vim.opt.number         = true
 vim.opt.relativenumber = true
 
 --hardcoded indentation
-vim.opt.sts            = 2 --Softtabstop
-vim.opt.sw             = 2 --Shiftwidth
+vim.opt.sts            = 2    --Softtabstop
+vim.opt.sw             = 2    --Shiftwidth
 vim.opt.sta            = true --Smartab uses 'sw'
 vim.opt.et             = true --Expandtab
 
