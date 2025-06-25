@@ -5,7 +5,16 @@ return {
   config = function()
     require("nvim-treesitter.configs").setup({
       ensure_installed = {
-        "lua", "bash", "json", "yaml", "rust", "python", "markdown", "rust", -- add more as needed
+        "javascript",
+        "lua",
+        "bash",
+        "json",
+        "yaml",
+        "rust",
+        "python",
+        "markdown",
+        "rust",
+        "bitbake",
       },
       auto_install = true, -- this is the important part
       highlight = {
@@ -15,7 +24,11 @@ return {
       indent = {
         enable = true,
       },
+      pickers = {
+        find_files = {
+          hidden = true,
+        },
+      },
     })
   end,
 }
-
