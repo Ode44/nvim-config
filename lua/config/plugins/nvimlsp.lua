@@ -2,7 +2,6 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = { "saghen/blink.cmp" },
 
-  -- example using `opts` for defining servers
   opts = {
     defaults = {
       -- passing config.capabilities to blink.cmp merges with the capabilities in your
@@ -11,10 +10,13 @@ return {
     },
     servers = {
       lua_ls = {},
+      bash_ls = {},
+      bitbake_ls = {},
     },
   },
   config = function(_, opts)
     local lspconfig = require("lspconfig")
+
     for server, config in pairs(opts.servers) do
       lspconfig[server].setup(opts.defaults)
     end

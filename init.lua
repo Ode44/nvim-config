@@ -17,8 +17,8 @@ vim.diagnostic.config({
 })
 
 --Enhanced vim experience
-vim.opt.path:append("**") --recursive `:find`
 vim.opt.termguicolors = true
+vim.opt.path:append("**") --recursive `:find`
 
 --skip confirmation file writes changes
 vim.o.confirm = false
@@ -26,21 +26,17 @@ vim.o.confirm = false
 require("config.lazy")
 require("telescope").setup()
 
-require("mason-lspconfig").setup({
-  automatic_enable = {
-    "lua_ls",
-    "vimls",
-  },
-})
+require("mason-lspconfig").setup()
 
 require("oil").setup(require("options.oil_tree"))
 require("nvim-treesitter.install").update({ with_sync = true })
 require("mini.icons").setup()
 
 vim.notify = require("notify")
-require("notify").setup(require("options.notify"))
+require("notify").setup(require("options.notifications"))
 
 require("remaps")
+require("commands")
 
 -- I though it will be cool. But --
 -- require('custom.f_term') -- Input lag between term and fish autocomplete
