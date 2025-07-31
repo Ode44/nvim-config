@@ -16,6 +16,25 @@ vim.diagnostic.config({
   signs = false, --fixed annoying text shift
 })
 
+--lsp ffs
+vim.lsp.set_log_level("debug")
+
+vim.lsp.config("*", {
+  root_markers = { ".git" },
+})
+
+vim.lsp.config("*", {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      },
+    },
+  },
+})
+
+vim.lsp.enable("language-server-bitbake", true)
+
 --Enhanced vim experience
 vim.opt.termguicolors = true
 vim.opt.path:append("**") --recursive `:find`
@@ -26,7 +45,9 @@ vim.o.confirm = false
 require("config.lazy")
 require("telescope").setup()
 
-require("mason-lspconfig").setup()
+-- require("mason").setup({
+-- })
+-- require("mason-lspconfig").setup()
 
 require("oil").setup(require("options.oil_tree"))
 require("nvim-treesitter.install").update({ with_sync = true })

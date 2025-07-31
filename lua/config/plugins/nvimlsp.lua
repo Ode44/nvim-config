@@ -18,7 +18,9 @@ return {
     local lspconfig = require("lspconfig")
 
     for server, config in pairs(opts.servers) do
-      lspconfig[server].setup(opts.defaults)
+      -- lspconfig[server].setup(opts.defaults)
+      local merged_config = vim.tbl_deep_extend("force", opts.defaults, config)
+      lspconfig[server].setup(merged_config)
     end
     -- typescript lsp is a separate freaking plugin --
     local ts_ls = require("config.plugins.ts-tools")
