@@ -13,8 +13,14 @@ vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP Rename" })
 vim.keymap.set("n", "<A-h>", "<CMD> :split<CR><C-w>w", { desc = "Horizontal split" })
 vim.keymap.set("n", "<A-v>", "<CMD>:vsplit<CR><C-w>w", { desc = "Vertical split" })
 
+--terminal across spans
+vim.keymap.set({ "n" }, "<leader>tt", function()
+  local max_height = 0.25
+  local window_height = math.floor(vim.o.lines * max_height)
+  vim.cmd("botright" .. window_height .. "split | terminal")
+end, { desc = "Open terminal in the bottom split" })
+
 --plugins
-vim.keymap.set({ "t", "n" }, "<leader>tt", "<CMD>Fterm<CR>", { desc = "Open or close floating term" })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("t", "<esc><esc>", "<c-\\><c-n>", { desc = "Escape to normal mode in terminal" })
 vim.keymap.set({ "v" }, "<leader>d", '"_d')
