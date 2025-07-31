@@ -58,6 +58,3 @@ require("notify").setup(require("options.notifications"))
 
 require("remaps")
 require("commands")
-
--- I though it will be cool. But --
--- require('custom.f_term') -- Input lag between term and fish autocomplete

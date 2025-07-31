@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 --should widen an active vertical buffer/window
 local function resize_on_focus()
-  local max_width = 0.6
+  local max_width = 0.65
   local total_width = vim.o.columns
   local focused_width = math.floor(total_width * max_width)
   local unfocused_width = math.floor((total_width - focused_width) / (#vim.api.nvim_tabpage_list_wins(0) - 1))
